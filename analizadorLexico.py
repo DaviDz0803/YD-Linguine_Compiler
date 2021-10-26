@@ -11,7 +11,7 @@ reservadas = ['BEGIN','END','IF','THEN','WHILE','DO','CALL','CONST',
 tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
 		'ODD','ASSIGN','NE','LT','LTE','GT','GTE',
 		'LPARENT', 'RPARENT','COMMA','SEMMICOLOM',
-		'DOT','UPDATE'
+		'DOT','UPDATE','NAME'
 		]
 
 
@@ -53,6 +53,7 @@ t_COMMA = r','
 t_SEMMICOLOM = r';'
 t_DOT = r'\.'
 t_UPDATE = r':='
+t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -65,7 +66,7 @@ def t_ID(t):
 
 def t_newline(t):
 	r'\n+'
-	t.lexer.lineno += len(t.value)
+	t.lexer.lineno += t.value.count("\n")
 
 #dsfjksdlgjklsdgjsdgslxcvjlk-,.
 def t_COMMENT(t):
@@ -78,10 +79,10 @@ def t_NUMBER(t):
 	return t
 
 def t_error(t):
-	print "caracter ilegal '%s'" % t.value[0]
+	print ("caracter ilegal " + t.value[0])
 	t.lexer.skip(1)
 
- def buscarFicheros(directorio):
+def buscarFicheros(directorio):
  	ficheros = []
  	numArchivo = ''
  	respuesta = False
@@ -91,32 +92,32 @@ def t_error(t):
  		ficheros.append(files)
 
  	for file in files:
- 		print str(cont)+". "+file
+ 		print (str(cont)+". "+file)
  		cont = cont+1
 
  	while respuesta == False:
- 		numArchivo = raw_input('\nNumero del test: ')
+ 		numArchivo = input('\nNumero del test: ')
  		for file in files:
  			if file == files[int(numArchivo)-1]:
  				respuesta = True
  				break
 
- 	print "Has escogido \"%s\" \n" %files[int(numArchivo)-1]
+ 	print ("Has escogido \"%s\" \n" %files[int(numArchivo)-1])
 
  	return files[int(numArchivo)-1]
 
- directorio = 'C:/Users/yuriz/Documents/UIP/IIIQ2021/Compiladores/Compilador/YD-Compilador/test'
- archivo = buscarFicheros(directorio)
- test = directorio+archivo
- fp = codecs.open(test,"r","utf-8")
- cadena = fp.read()
- fp.close()
+directorio = 'C://Users/yuriz/Documents/UIP/IIIQ2021/Compiladores/Compilador/YD-Compilador/test/'
+archivo = buscarFicheros(directorio)
+test = directorio+archivo
+fp = codecs.open(test,"r","utf-8")
+cadena = fp.read()
+fp.close()
 
 analizador = lex.lex()
 
 analizador.input(cadena)
 
- while True:
- 	tok = analizador.token()
- 	if not tok : break
- 	print tok
+while True:
+    tok = analizador.token()
+    if not tok : break
+    print (tok)

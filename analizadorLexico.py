@@ -11,7 +11,7 @@ reservadas = ['BEGIN','END','IF','THEN','WHILE','DO','CALL','CONST',
 tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
 		'ODD','ASSIGN','NE','LT','LTE','GT','GTE',
 		'LPARENT', 'RPARENT','COMMA','SEMMICOLOM',
-		'DOT','UPDATE','NAME'
+		'DOT','UPDATE'
 		]
 
 
@@ -53,7 +53,7 @@ t_COMMA = r','
 t_SEMMICOLOM = r';'
 t_DOT = r'\.'
 t_UPDATE = r':='
-t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
+
 
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'

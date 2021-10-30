@@ -15,26 +15,6 @@ tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
 		]
 
 
-#tokens = tokens+reservadas
-
-# reservadas = {
-	# 'begin':'BEGIN',
-	# 'end':'END',
-	# 'if':'IF',
-	# 'then':'THEN',
-	# 'while':'WHILE',
-	# 'do':'DO',
-	# 'call':'CALL',
-	# 'const':'CONST',
-	# 'int':'VAR',
-	# 'procedure':'PROCEDURE',
-	# 'out':'OUT',
-	# 'in':'IN',
-	# 'else':'ELSE'
-# }
-
-#tokens = tokens+list(reservadas.values())
-
 t_ignore = '\t '
 t_PLUS = r'\+'
 t_MINUS = r'\-'

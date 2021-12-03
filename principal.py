@@ -1,3 +1,6 @@
+import os
+import codecs
+import ply.lex as lex
 import gramatica as g
 import ts as TS
 from expresiones import *
@@ -85,7 +88,38 @@ def procesar_instrucciones(instrucciones, ts) :
         elif isinstance(instr, IfElse) : procesar_if_else(instr, ts)
         else : print('Error: instrucción no válida')
 
-f = open("./entrada.txt", "r")
+
+
+def buscarFicheros(directorio):
+    ficheros = []
+    numArchivo = ''
+    respuesta = False
+    cont = 1
+    for base, dirs, files in os.walk(directorio):
+        ficheros.append(files)
+        
+    for file in files:
+        print (str(cont)+". "+file)
+        cont = cont+1
+    
+    while respuesta == False:
+        numArchivo = input('\nNumero del test: ')
+        for file in files:
+            if file == files[int(numArchivo)-1]:
+                respuesta = True
+                break
+
+    print ("Has escogido \"%s\" \n" %files[int(numArchivo)-1])
+
+    return files[int(numArchivo)-1]
+
+
+directorio = './test/'
+archivo = buscarFicheros(directorio)
+#print(directorio+archivo)
+f = open(directorio+archivo, "r")
+
+#f = open("./entrada.txt", "r")
 input = f.read()
 
 instrucciones = g.parse(input) #Recibe el archivo y se lo pasa a 

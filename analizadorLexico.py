@@ -11,29 +11,9 @@ reservadas = ['BEGIN','END','IF','THEN','WHILE','DO','CALL','CONST',
 tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
 		'ODD','ASSIGN','NE','LT','LTE','GT','GTE',
 		'LPARENT', 'RPARENT','COMMA','SEMMICOLOM',
-		'DOT','UPDATE','NAME'
+		'DOT','UPDATE'
 		]
 
-
-#tokens = tokens+reservadas
-
-# reservadas = {
-	# 'begin':'BEGIN',
-	# 'end':'END',
-	# 'if':'IF',
-	# 'then':'THEN',
-	# 'while':'WHILE',
-	# 'do':'DO',
-	# 'call':'CALL',
-	# 'const':'CONST',
-	# 'int':'VAR',
-	# 'procedure':'PROCEDURE',
-	# 'out':'OUT',
-	# 'in':'IN',
-	# 'else':'ELSE'
-# }
-
-#tokens = tokens+list(reservadas.values())
 
 t_ignore = '\t '
 t_PLUS = r'\+'
@@ -53,13 +33,12 @@ t_COMMA = r','
 t_SEMMICOLOM = r';'
 t_DOT = r'\.'
 t_UPDATE = r':='
-t_NAME    = r'[a-zA-Z_][a-zA-Z0-9_]*'
+
 
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'
 	if t.value.upper() in reservadas:
 		t.value = t.value.upper()
-		#reservadas.get(t.value,'ID')
 		t.type = t.value
 
 	return t
@@ -68,7 +47,7 @@ def t_newline(t):
 	r'\n+'
 	t.lexer.lineno += t.value.count("\n")
 
-#dsfjksdlgjklsdgjsdgslxcvjlk-,.
+
 def t_COMMENT(t):
 	r'\#.*'
 	pass
@@ -106,7 +85,7 @@ def buscarFicheros(directorio):
 
  	return files[int(numArchivo)-1]
 
-directorio = 'C://Users/yuriz/Documents/UIP/IIIQ2021/Compiladores/Compilador/YD-Compilador/test/'
+directorio = 'C://Users/daviddz/Documents/Git/Github/Compilador/YD-Compilador/test/'
 archivo = buscarFicheros(directorio)
 test = directorio+archivo
 fp = codecs.open(test,"r","utf-8")

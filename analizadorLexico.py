@@ -47,10 +47,6 @@ def t_newline(t):
 	r'\n+'
 	t.lexer.lineno += t.value.count("\n")
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b98b92ba93c1c7c834b91cbdc47992e0db6f05d6
 def t_COMMENT(t):
 	r'\#.*'
 	pass

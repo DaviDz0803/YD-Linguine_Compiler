@@ -4,61 +4,103 @@ import codecs
 import os 
 import sys
 
-reservadas = ['BEGIN','END','IF','THEN','WHILE','DO','CALL','CONST',
-		'VAR','PROCEDURE','OUT','IN','ELSE'
-		]
+reservadas = {
+    'cantidad' : 'CANTIDAD',
+    'servir' : 'SERVIR',
+    'durante' : 'DURANTE',
+    'if' : 'IF',
+    'else' : 'ELSE'
+}
 
-tokens = reservadas+['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
-		'ODD','ASSIGN','NE','LT','LTE','GT','GTE',
-		'LPARENT', 'RPARENT','COMMA','SEMMICOLOM',
-		'DOT','UPDATE'
-		]
+tokens  = [
+    'SEMMICOLOM',
+    'LKEY',
+    'RKEY',
+    'LPARENT',
+    'RPARENT',
+    'ASSIGN',
+    'PLUS',
+    'MINUS',
+    'MULTIPLY',
+    'DIVIDE',
+    'CONCAT',
+    'LESSTHAN',
+    'MORETHAN',
+    'EQUALS',
+    'NOTEQUALS',
+    'ONZA', #DECIMAL
+    'GRAMOS', #ENTEROS
+    'CHAIN', #CADENA
+    'ID'
+] + list(reservadas.values())
 
 
-t_ignore = '\t '
-t_PLUS = r'\+'
-t_MINUS = r'\-'
-t_TIMES = r'\*'
-t_DIVIDE = r'/'
-t_ODD = r'ODD'
-t_ASSIGN = r'='
-t_NE = r'<>'
-t_LT = r'<'
-t_LTE = r'<='
-t_GT = r'>'
-t_GTE = r'>='
-t_LPARENT = r'\('
-t_RPARENT = r'\)'
-t_COMMA = r','
+# Tokens
 t_SEMMICOLOM = r';'
-t_DOT = r'\.'
-t_UPDATE = r':='
+t_LKEY = r'{'
+t_RKEY = r'}'
+t_LPARENT    = r'\('
+t_RPARENT    = r'\)'
+t_ASSIGN     = r'='
+t_PLUS      = r'\+'
+t_MINUS     = r'-'
+t_MULTIPLY  = r'\*'
+t_DIVIDE  	= r'/'
+t_CONCAT    = r'&'
+t_LESSTHAN    = r'<'
+t_MORETHAN    = r'>'
+t_EQUALS  = r'=='
+t_NOTEQUALS = r'!='
 
+
+def t_ONZA(t):
+    r'\d+\.\d+'
+    try:
+        t.value = float(t.value)
+    except ValueError:
+        print("Float value too large %d", t.value)
+        t.value = 0
+    return t
+
+def t_GRAMOS(t):
+    r'\d+'
+    try:
+        t.value = int(t.value)
+    except ValueError:
+        print("Integer value too large %d", t.value)
+        t.value = 0
+    return t
 
 def t_ID(t):
-	r'[a-zA-Z_][a-zA-Z0-9_]*'
-	if t.value.upper() in reservadas:
-		t.value = t.value.upper()
-		t.type = t.value
+     r'[a-zA-Z_][a-zA-Z_0-9]*'
+     t.type = reservadas.get(t.value.lower(),'ID')    # Check for reserved words
+     return t
 
-	return t
+def t_CHAIN(t):
+    r'\".*?\"'
+    t.value = t.value[1:-1] # remuevo las comillas
+    return t 
+
+# Comentario de múltiples líneas /* .. */
+def t_MULTI_COMMENT(t):
+    r'/\*(.|\n)*?\*/'
+    t.lexer.lineno += t.value.count('\n')
+
+# Comentario simple // ...
+def t_SIMPLE_COMENT(t):
+    r'//.*\n'
+    t.lexer.lineno += 1
+
+# Caracteres ignorados
+t_ignore = " \t"
 
 def t_newline(t):
-	r'\n+'
-	t.lexer.lineno += t.value.count("\n")
-
-def t_COMMENT(t):
-	r'\#.*'
-	pass
-
-def t_NUMBER(t):
-	r'\d+'
-	t.value = int(t.value)
-	return t
-
+    r'\n+'
+    t.lexer.lineno += t.value.count("\n")
+    
 def t_error(t):
-	print ("caracter ilegal " + t.value[0])
-	t.lexer.skip(1)
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1)
 
 def buscarFicheros(directorio):
  	ficheros = []

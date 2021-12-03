@@ -29,7 +29,7 @@ tokens  = [
     'EQUALS',
     'NOTEQUALS',
     'ONZA', #DECIMAL
-    'GRAMOS', #ENTEROS
+    'GRAMO', #ENTEROS
     'CHAIN', #CADENA
     'ID'
 ] + list(reservadas.values())
@@ -39,17 +39,17 @@ tokens  = [
 t_SEMMICOLOM = r';'
 t_LKEY = r'{'
 t_RKEY = r'}'
-t_LPARENT    = r'\('
-t_RPARENT    = r'\)'
-t_ASSIGN     = r'='
-t_PLUS      = r'\+'
-t_MINUS     = r'-'
-t_MULTIPLY  = r'\*'
-t_DIVIDE  	= r'/'
-t_CONCAT    = r'&'
-t_LESSTHAN    = r'<'
-t_MORETHAN    = r'>'
-t_EQUALS  = r'=='
+t_LPARENT = r'\('
+t_RPARENT = r'\)'
+t_ASSIGN = r'='
+t_PLUS = r'\+'
+t_MINUS = r'-'
+t_MULTIPLY = r'\*'
+t_DIVIDE = r'/'
+t_CONCAT = r'&'
+t_LESSTHAN = r'<'
+t_MORETHAN = r'>'
+t_EQUALS = r'=='
 t_NOTEQUALS = r'!='
 
 
@@ -62,7 +62,7 @@ def t_ONZA(t):
         t.value = 0
     return t
 
-def t_GRAMOS(t):
+def t_GRAMO(t):
     r'\d+'
     try:
         t.value = int(t.value)
@@ -102,42 +102,41 @@ def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
-def buscarFicheros(directorio):
- 	ficheros = []
- 	numArchivo = ''
- 	respuesta = False
- 	cont = 1
+#def buscarFicheros(directorio):
+# 	ficheros = []
+# 	numArchivo = ''
+# 	respuesta = False
+# 	cont = 1
 
- 	for base, dirs, files in os.walk(directorio):
- 		ficheros.append(files)
+# 	for base, dirs, files in os.walk(directorio):
+# 		ficheros.append(files)
 
- 	for file in files:
- 		print (str(cont)+". "+file)
- 		cont = cont+1
+# 	for file in files:
+# 		print (str(cont)+". "+file)
+# 		cont = cont+1
 
- 	while respuesta == False:
- 		numArchivo = input('\nNumero del test: ')
- 		for file in files:
- 			if file == files[int(numArchivo)-1]:
- 				respuesta = True
- 				break
+# 	while respuesta == False:
+# 		numArchivo = input('\nNumero del test: ')
+# 		for file in files:
+# 			if file == files[int(numArchivo)-1]:
+# 				respuesta = True
+# 				break
 
- 	print ("Has escogido \"%s\" \n" %files[int(numArchivo)-1])
+# 	print ("Has escogido \"%s\" \n" %files[int(numArchivo)-1])
 
- 	return files[int(numArchivo)-1]
+# 	return files[int(numArchivo)-1]
 
-directorio = 'C://Users/daviddz/Documents/Git/Github/Compilador/YD-Compilador/test/'
-archivo = buscarFicheros(directorio)
-test = directorio+archivo
-fp = codecs.open(test,"r","utf-8")
-cadena = fp.read()
-fp.close()
+#directorio = 'C://Users/daviddz/Documents/Git/Github/Compilador/YD-Compilador/test/'
+#archivo = buscarFicheros(directorio)
+#test = directorio+archivo
+#fp = codecs.open(test,"r","utf-8")
+#cadena = fp.read()
+#fp.close()
 
-analizador = lex.lex()
+#lexer = lex.lex()
+#lexer.input(cadena)
 
-analizador.input(cadena)
-
-while True:
-    tok = analizador.token()
-    if not tok : break
-    print (tok)
+#while True:
+#    tok = lexer.token()
+#    if not tok : break
+#    print (tok)

@@ -1,8 +1,6 @@
 const
-  m=7,
+  m=7.2,
   n=85;
-
-#flgmsdglsm .,,sdf
 
 VAR
   x, y, z, q, r;

@@ -1,0 +1,123 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ASSIGN
+    CANTIDAD
+    CHAIN
+    DIVIDE
+    DURANTE
+    EQUALS
+    GRAMOS
+    LESSTHAN
+    LKEY
+    LPARENT
+    MINUS
+    MORETHAN
+    MULTIPLY
+    NOTEQUALS
+    ONZA
+    PLUS
+    RKEY
+    RPARENT
+    SEMMICOLOM
+    SERVIR
+
+Grammar
+
+Rule 0     S' -> init
+Rule 1     init -> instrucciones
+Rule 2     instrucciones -> instrucciones instruccion
+Rule 3     instrucciones -> instruccion
+Rule 4     instruccion -> imprimir_instr
+Rule 5     instruccion -> definicion_instr
+Rule 6     instruccion -> asignacion_instr
+Rule 7     instruccion -> mientras_instr
+Rule 8     instruccion -> if_instr
+Rule 9     instruccion -> if_else_instr
+Rule 10    imprimir_instr -> IMPRIMIR PARIZQ expresion_cadena PARDER PTCOMA
+Rule 11    definicion_instr -> NUMERO ID PTCOMA
+Rule 12    asignacion_instr -> ID IGUAL expresion_numerica PTCOMA
+Rule 13    mientras_instr -> MIENTRAS PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER
+Rule 14    if_instr -> IF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER
+Rule 15    if_else_instr -> IF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER ELSE LLAVIZQ instrucciones LLAVDER
+Rule 16    expresion_numerica -> expresion_numerica MAS expresion_numerica
+Rule 17    expresion_numerica -> expresion_numerica MENOS expresion_numerica
+Rule 18    expresion_numerica -> expresion_numerica POR expresion_numerica
+Rule 19    expresion_numerica -> expresion_numerica DIVIDIDO expresion_numerica
+Rule 20    expresion_numerica -> MENOS expresion_numerica
+Rule 21    expresion_numerica -> PARIZQ expresion_numerica PARDER
+Rule 22    expresion_numerica -> ENTERO
+Rule 23    expresion_numerica -> DECIMAL
+Rule 24    expresion_numerica -> ID
+Rule 25    expresion_cadena -> expresion_cadena CONCAT expresion_cadena
+Rule 26    expresion_cadena -> CADENA
+Rule 27    expresion_cadena -> expresion_numerica
+Rule 28    expresion_logica -> expresion_numerica MAYQUE expresion_numerica
+Rule 29    expresion_logica -> expresion_numerica MENQUE expresion_numerica
+Rule 30    expresion_logica -> expresion_numerica IGUALQUE expresion_numerica
+Rule 31    expresion_logica -> expresion_numerica NIGUALQUE expresion_numerica
+
+Terminals, with rules where they appear
+
+ASSIGN               : 
+CANTIDAD             : 
+CHAIN                : 
+CONCAT               : 25
+DIVIDE               : 
+DURANTE              : 
+ELSE                 : 15
+EQUALS               : 
+GRAMOS               : 
+ID                   : 11 12 24
+IF                   : 14 15
+LESSTHAN             : 
+LKEY                 : 
+LPARENT              : 
+MINUS                : 
+MORETHAN             : 
+MULTIPLY             : 
+NOTEQUALS            : 
+ONZA                 : 
+PLUS                 : 
+RKEY                 : 
+RPARENT              : 
+SEMMICOLOM           : 
+SERVIR               : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+CADENA               : 26
+DECIMAL              : 23
+DIVIDIDO             : 19
+ENTERO               : 22
+IGUAL                : 12
+IGUALQUE             : 30
+IMPRIMIR             : 10
+LLAVDER              : 13 14 15 15
+LLAVIZQ              : 13 14 15 15
+MAS                  : 16
+MAYQUE               : 28
+MENOS                : 17 20
+MENQUE               : 29
+MIENTRAS             : 13
+NIGUALQUE            : 31
+NUMERO               : 11
+PARDER               : 10 13 14 15 21
+PARIZQ               : 10 13 14 15 21
+POR                  : 18
+PTCOMA               : 10 11 12
+asignacion_instr     : 6
+definicion_instr     : 5
+expresion_cadena     : 10 25 25
+expresion_logica     : 13 14 15
+expresion_numerica   : 12 16 16 17 17 18 18 19 19 20 21 27 28 28 29 29 30 30 31 31
+if_else_instr        : 9
+if_instr             : 8
+imprimir_instr       : 4
+init                 : 0
+instruccion          : 2 3
+instrucciones        : 1 2 13 14 15 15
+mientras_instr       : 7
+

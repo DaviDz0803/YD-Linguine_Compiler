@@ -1,7 +1,7 @@
 class Instruccion:
     '''This is an abstract class'''
 
-class Imprimir(Instruccion) :
+class Servir(Instruccion) :
     '''
         Esta clase representa la instrucción imprimir.
         La instrucción imprimir únicamente tiene como parámetro una cadena

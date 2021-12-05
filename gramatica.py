@@ -5,7 +5,7 @@ import ply.yacc as yacc
 
 
 reservadas = {
-    'cantidad' : 'CANTIDAD',
+    'ingrediente' : 'INGREDIENTE',
     'servir' : 'SERVIR',
     'durante' : 'DURANTE',
     'sitiene' : 'SITIENE',
@@ -144,7 +144,7 @@ def p_instruccion_servir(t) :
     t[0] =Servir(t[3])
 
 def p_instruccion_definicion(t) :
-    'definicion_instr   : CANTIDAD ID SEMMICOLOM'
+    'definicion_instr   : INGREDIENTE ID SEMMICOLOM'
     t[0] =Definicion(t[2])
 
 def p_asignacion_instr(t) :

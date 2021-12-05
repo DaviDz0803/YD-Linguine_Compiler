@@ -13,7 +13,7 @@ Rule 7     instruccion -> durante_instr
 Rule 8     instruccion -> sitiene_instr
 Rule 9     instruccion -> sino_instr
 Rule 10    servir_instr -> SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-Rule 11    definicion_instr -> CANTIDAD ID SEMMICOLOM
+Rule 11    definicion_instr -> INGREDIENTE ID SEMMICOLOM
 Rule 12    asignacion_instr -> ID ASSIGN expresion_numerica SEMMICOLOM
 Rule 13    durante_instr -> DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
 Rule 14    sitiene_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
@@ -38,7 +38,6 @@ Rule 31    expresion_logica -> expresion_numerica NOTEQUALS expresion_numerica
 Terminals, with rules where they appear
 
 ASSIGN               : 12
-CANTIDAD             : 11
 CHAIN                : 26
 CONCAT               : 25
 DIVIDE               : 19
@@ -46,6 +45,7 @@ DURANTE              : 13
 EQUALS               : 30
 GRAMO                : 23
 ID                   : 11 12 24
+INGREDIENTE          : 11
 LESSTHAN             : 29
 LKEY                 : 13 14 15 15
 LPARENT              : 10 13 14 15 21
@@ -93,14 +93,14 @@ state 0
     (8) instruccion -> . sitiene_instr
     (9) instruccion -> . sino_instr
     (10) servir_instr -> . SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-    (11) definicion_instr -> . CANTIDAD ID SEMMICOLOM
+    (11) definicion_instr -> . INGREDIENTE ID SEMMICOLOM
     (12) asignacion_instr -> . ID ASSIGN expresion_numerica SEMMICOLOM
     (13) durante_instr -> . DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (14) sitiene_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (15) sino_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY
 
     SERVIR          shift and go to state 10
-    CANTIDAD        shift and go to state 11
+    INGREDIENTE     shift and go to state 11
     ID              shift and go to state 12
     DURANTE         shift and go to state 13
     SITIENE         shift and go to state 14
@@ -132,7 +132,7 @@ state 2
     (8) instruccion -> . sitiene_instr
     (9) instruccion -> . sino_instr
     (10) servir_instr -> . SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-    (11) definicion_instr -> . CANTIDAD ID SEMMICOLOM
+    (11) definicion_instr -> . INGREDIENTE ID SEMMICOLOM
     (12) asignacion_instr -> . ID ASSIGN expresion_numerica SEMMICOLOM
     (13) durante_instr -> . DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (14) sitiene_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
@@ -140,7 +140,7 @@ state 2
 
     $end            reduce using rule 1 (init -> instrucciones .)
     SERVIR          shift and go to state 10
-    CANTIDAD        shift and go to state 11
+    INGREDIENTE     shift and go to state 11
     ID              shift and go to state 12
     DURANTE         shift and go to state 13
     SITIENE         shift and go to state 14
@@ -158,7 +158,7 @@ state 3
     (3) instrucciones -> instruccion .
 
     SERVIR          reduce using rule 3 (instrucciones -> instruccion .)
-    CANTIDAD        reduce using rule 3 (instrucciones -> instruccion .)
+    INGREDIENTE     reduce using rule 3 (instrucciones -> instruccion .)
     ID              reduce using rule 3 (instrucciones -> instruccion .)
     DURANTE         reduce using rule 3 (instrucciones -> instruccion .)
     SITIENE         reduce using rule 3 (instrucciones -> instruccion .)
@@ -171,7 +171,7 @@ state 4
     (4) instruccion -> servir_instr .
 
     SERVIR          reduce using rule 4 (instruccion -> servir_instr .)
-    CANTIDAD        reduce using rule 4 (instruccion -> servir_instr .)
+    INGREDIENTE     reduce using rule 4 (instruccion -> servir_instr .)
     ID              reduce using rule 4 (instruccion -> servir_instr .)
     DURANTE         reduce using rule 4 (instruccion -> servir_instr .)
     SITIENE         reduce using rule 4 (instruccion -> servir_instr .)
@@ -184,7 +184,7 @@ state 5
     (5) instruccion -> definicion_instr .
 
     SERVIR          reduce using rule 5 (instruccion -> definicion_instr .)
-    CANTIDAD        reduce using rule 5 (instruccion -> definicion_instr .)
+    INGREDIENTE     reduce using rule 5 (instruccion -> definicion_instr .)
     ID              reduce using rule 5 (instruccion -> definicion_instr .)
     DURANTE         reduce using rule 5 (instruccion -> definicion_instr .)
     SITIENE         reduce using rule 5 (instruccion -> definicion_instr .)
@@ -197,7 +197,7 @@ state 6
     (6) instruccion -> asignacion_instr .
 
     SERVIR          reduce using rule 6 (instruccion -> asignacion_instr .)
-    CANTIDAD        reduce using rule 6 (instruccion -> asignacion_instr .)
+    INGREDIENTE     reduce using rule 6 (instruccion -> asignacion_instr .)
     ID              reduce using rule 6 (instruccion -> asignacion_instr .)
     DURANTE         reduce using rule 6 (instruccion -> asignacion_instr .)
     SITIENE         reduce using rule 6 (instruccion -> asignacion_instr .)
@@ -210,7 +210,7 @@ state 7
     (7) instruccion -> durante_instr .
 
     SERVIR          reduce using rule 7 (instruccion -> durante_instr .)
-    CANTIDAD        reduce using rule 7 (instruccion -> durante_instr .)
+    INGREDIENTE     reduce using rule 7 (instruccion -> durante_instr .)
     ID              reduce using rule 7 (instruccion -> durante_instr .)
     DURANTE         reduce using rule 7 (instruccion -> durante_instr .)
     SITIENE         reduce using rule 7 (instruccion -> durante_instr .)
@@ -223,7 +223,7 @@ state 8
     (8) instruccion -> sitiene_instr .
 
     SERVIR          reduce using rule 8 (instruccion -> sitiene_instr .)
-    CANTIDAD        reduce using rule 8 (instruccion -> sitiene_instr .)
+    INGREDIENTE     reduce using rule 8 (instruccion -> sitiene_instr .)
     ID              reduce using rule 8 (instruccion -> sitiene_instr .)
     DURANTE         reduce using rule 8 (instruccion -> sitiene_instr .)
     SITIENE         reduce using rule 8 (instruccion -> sitiene_instr .)
@@ -236,7 +236,7 @@ state 9
     (9) instruccion -> sino_instr .
 
     SERVIR          reduce using rule 9 (instruccion -> sino_instr .)
-    CANTIDAD        reduce using rule 9 (instruccion -> sino_instr .)
+    INGREDIENTE     reduce using rule 9 (instruccion -> sino_instr .)
     ID              reduce using rule 9 (instruccion -> sino_instr .)
     DURANTE         reduce using rule 9 (instruccion -> sino_instr .)
     SITIENE         reduce using rule 9 (instruccion -> sino_instr .)
@@ -253,7 +253,7 @@ state 10
 
 state 11
 
-    (11) definicion_instr -> CANTIDAD . ID SEMMICOLOM
+    (11) definicion_instr -> INGREDIENTE . ID SEMMICOLOM
 
     ID              shift and go to state 17
 
@@ -285,7 +285,7 @@ state 15
     (2) instrucciones -> instrucciones instruccion .
 
     SERVIR          reduce using rule 2 (instrucciones -> instrucciones instruccion .)
-    CANTIDAD        reduce using rule 2 (instrucciones -> instrucciones instruccion .)
+    INGREDIENTE     reduce using rule 2 (instrucciones -> instrucciones instruccion .)
     ID              reduce using rule 2 (instrucciones -> instrucciones instruccion .)
     DURANTE         reduce using rule 2 (instrucciones -> instrucciones instruccion .)
     SITIENE         reduce using rule 2 (instrucciones -> instrucciones instruccion .)
@@ -321,7 +321,7 @@ state 16
 
 state 17
 
-    (11) definicion_instr -> CANTIDAD ID . SEMMICOLOM
+    (11) definicion_instr -> INGREDIENTE ID . SEMMICOLOM
 
     SEMMICOLOM      shift and go to state 29
 
@@ -528,15 +528,15 @@ state 28
 
 state 29
 
-    (11) definicion_instr -> CANTIDAD ID SEMMICOLOM .
+    (11) definicion_instr -> INGREDIENTE ID SEMMICOLOM .
 
-    SERVIR          reduce using rule 11 (definicion_instr -> CANTIDAD ID SEMMICOLOM .)
-    CANTIDAD        reduce using rule 11 (definicion_instr -> CANTIDAD ID SEMMICOLOM .)
-    ID              reduce using rule 11 (definicion_instr -> CANTIDAD ID SEMMICOLOM .)
-    DURANTE         reduce using rule 11 (definicion_instr -> CANTIDAD ID SEMMICOLOM .)
-    SITIENE         reduce using rule 11 (definicion_instr -> CANTIDAD ID SEMMICOLOM .)
-    $end            reduce using rule 11 (definicion_instr -> CANTIDAD ID SEMMICOLOM .)
-    RKEY            reduce using rule 11 (definicion_instr -> CANTIDAD ID SEMMICOLOM .)
+    SERVIR          reduce using rule 11 (definicion_instr -> INGREDIENTE ID SEMMICOLOM .)
+    INGREDIENTE     reduce using rule 11 (definicion_instr -> INGREDIENTE ID SEMMICOLOM .)
+    ID              reduce using rule 11 (definicion_instr -> INGREDIENTE ID SEMMICOLOM .)
+    DURANTE         reduce using rule 11 (definicion_instr -> INGREDIENTE ID SEMMICOLOM .)
+    SITIENE         reduce using rule 11 (definicion_instr -> INGREDIENTE ID SEMMICOLOM .)
+    $end            reduce using rule 11 (definicion_instr -> INGREDIENTE ID SEMMICOLOM .)
+    RKEY            reduce using rule 11 (definicion_instr -> INGREDIENTE ID SEMMICOLOM .)
 
 
 state 30
@@ -753,7 +753,7 @@ state 42
     (12) asignacion_instr -> ID ASSIGN expresion_numerica SEMMICOLOM .
 
     SERVIR          reduce using rule 12 (asignacion_instr -> ID ASSIGN expresion_numerica SEMMICOLOM .)
-    CANTIDAD        reduce using rule 12 (asignacion_instr -> ID ASSIGN expresion_numerica SEMMICOLOM .)
+    INGREDIENTE     reduce using rule 12 (asignacion_instr -> ID ASSIGN expresion_numerica SEMMICOLOM .)
     ID              reduce using rule 12 (asignacion_instr -> ID ASSIGN expresion_numerica SEMMICOLOM .)
     DURANTE         reduce using rule 12 (asignacion_instr -> ID ASSIGN expresion_numerica SEMMICOLOM .)
     SITIENE         reduce using rule 12 (asignacion_instr -> ID ASSIGN expresion_numerica SEMMICOLOM .)
@@ -882,7 +882,7 @@ state 50
     (10) servir_instr -> SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM .
 
     SERVIR          reduce using rule 10 (servir_instr -> SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM .)
-    CANTIDAD        reduce using rule 10 (servir_instr -> SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM .)
+    INGREDIENTE     reduce using rule 10 (servir_instr -> SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM .)
     ID              reduce using rule 10 (servir_instr -> SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM .)
     DURANTE         reduce using rule 10 (servir_instr -> SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM .)
     SITIENE         reduce using rule 10 (servir_instr -> SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM .)
@@ -1017,14 +1017,14 @@ state 56
     (8) instruccion -> . sitiene_instr
     (9) instruccion -> . sino_instr
     (10) servir_instr -> . SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-    (11) definicion_instr -> . CANTIDAD ID SEMMICOLOM
+    (11) definicion_instr -> . INGREDIENTE ID SEMMICOLOM
     (12) asignacion_instr -> . ID ASSIGN expresion_numerica SEMMICOLOM
     (13) durante_instr -> . DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (14) sitiene_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (15) sino_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY
 
     SERVIR          shift and go to state 10
-    CANTIDAD        shift and go to state 11
+    INGREDIENTE     shift and go to state 11
     ID              shift and go to state 12
     DURANTE         shift and go to state 13
     SITIENE         shift and go to state 14
@@ -1111,14 +1111,14 @@ state 61
     (8) instruccion -> . sitiene_instr
     (9) instruccion -> . sino_instr
     (10) servir_instr -> . SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-    (11) definicion_instr -> . CANTIDAD ID SEMMICOLOM
+    (11) definicion_instr -> . INGREDIENTE ID SEMMICOLOM
     (12) asignacion_instr -> . ID ASSIGN expresion_numerica SEMMICOLOM
     (13) durante_instr -> . DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (14) sitiene_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (15) sino_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY
 
     SERVIR          shift and go to state 10
-    CANTIDAD        shift and go to state 11
+    INGREDIENTE     shift and go to state 11
     ID              shift and go to state 12
     DURANTE         shift and go to state 13
     SITIENE         shift and go to state 14
@@ -1143,7 +1143,7 @@ state 62
     (8) instruccion -> . sitiene_instr
     (9) instruccion -> . sino_instr
     (10) servir_instr -> . SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-    (11) definicion_instr -> . CANTIDAD ID SEMMICOLOM
+    (11) definicion_instr -> . INGREDIENTE ID SEMMICOLOM
     (12) asignacion_instr -> . ID ASSIGN expresion_numerica SEMMICOLOM
     (13) durante_instr -> . DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (14) sitiene_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
@@ -1151,7 +1151,7 @@ state 62
 
     RKEY            shift and go to state 64
     SERVIR          shift and go to state 10
-    CANTIDAD        shift and go to state 11
+    INGREDIENTE     shift and go to state 11
     ID              shift and go to state 12
     DURANTE         shift and go to state 13
     SITIENE         shift and go to state 14
@@ -1176,7 +1176,7 @@ state 63
     (8) instruccion -> . sitiene_instr
     (9) instruccion -> . sino_instr
     (10) servir_instr -> . SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-    (11) definicion_instr -> . CANTIDAD ID SEMMICOLOM
+    (11) definicion_instr -> . INGREDIENTE ID SEMMICOLOM
     (12) asignacion_instr -> . ID ASSIGN expresion_numerica SEMMICOLOM
     (13) durante_instr -> . DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (14) sitiene_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
@@ -1184,7 +1184,7 @@ state 63
 
     RKEY            shift and go to state 65
     SERVIR          shift and go to state 10
-    CANTIDAD        shift and go to state 11
+    INGREDIENTE     shift and go to state 11
     ID              shift and go to state 12
     DURANTE         shift and go to state 13
     SITIENE         shift and go to state 14
@@ -1202,7 +1202,7 @@ state 64
     (13) durante_instr -> DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .
 
     SERVIR          reduce using rule 13 (durante_instr -> DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
-    CANTIDAD        reduce using rule 13 (durante_instr -> DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
+    INGREDIENTE     reduce using rule 13 (durante_instr -> DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
     ID              reduce using rule 13 (durante_instr -> DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
     DURANTE         reduce using rule 13 (durante_instr -> DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
     SITIENE         reduce using rule 13 (durante_instr -> DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
@@ -1216,7 +1216,7 @@ state 65
     (15) sino_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY . SINO LKEY instrucciones RKEY
 
     SERVIR          reduce using rule 14 (sitiene_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
-    CANTIDAD        reduce using rule 14 (sitiene_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
+    INGREDIENTE     reduce using rule 14 (sitiene_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
     ID              reduce using rule 14 (sitiene_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
     DURANTE         reduce using rule 14 (sitiene_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
     SITIENE         reduce using rule 14 (sitiene_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY .)
@@ -1244,14 +1244,14 @@ state 67
     (8) instruccion -> . sitiene_instr
     (9) instruccion -> . sino_instr
     (10) servir_instr -> . SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-    (11) definicion_instr -> . CANTIDAD ID SEMMICOLOM
+    (11) definicion_instr -> . INGREDIENTE ID SEMMICOLOM
     (12) asignacion_instr -> . ID ASSIGN expresion_numerica SEMMICOLOM
     (13) durante_instr -> . DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (14) sitiene_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (15) sino_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY
 
     SERVIR          shift and go to state 10
-    CANTIDAD        shift and go to state 11
+    INGREDIENTE     shift and go to state 11
     ID              shift and go to state 12
     DURANTE         shift and go to state 13
     SITIENE         shift and go to state 14
@@ -1276,7 +1276,7 @@ state 68
     (8) instruccion -> . sitiene_instr
     (9) instruccion -> . sino_instr
     (10) servir_instr -> . SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM
-    (11) definicion_instr -> . CANTIDAD ID SEMMICOLOM
+    (11) definicion_instr -> . INGREDIENTE ID SEMMICOLOM
     (12) asignacion_instr -> . ID ASSIGN expresion_numerica SEMMICOLOM
     (13) durante_instr -> . DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
     (14) sitiene_instr -> . SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY
@@ -1284,7 +1284,7 @@ state 68
 
     RKEY            shift and go to state 69
     SERVIR          shift and go to state 10
-    CANTIDAD        shift and go to state 11
+    INGREDIENTE     shift and go to state 11
     ID              shift and go to state 12
     DURANTE         shift and go to state 13
     SITIENE         shift and go to state 14
@@ -1302,7 +1302,7 @@ state 69
     (15) sino_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY .
 
     SERVIR          reduce using rule 15 (sino_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY .)
-    CANTIDAD        reduce using rule 15 (sino_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY .)
+    INGREDIENTE     reduce using rule 15 (sino_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY .)
     ID              reduce using rule 15 (sino_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY .)
     DURANTE         reduce using rule 15 (sino_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY .)
     SITIENE         reduce using rule 15 (sino_instr -> SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY .)

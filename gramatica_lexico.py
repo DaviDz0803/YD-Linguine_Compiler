@@ -5,7 +5,7 @@ import os
 import sys
 
 reservadas = {
-    'cantidad' : 'CANTIDAD',
+    'ingrediente' : 'INGREDIENTE',
     'servir' : 'SERVIR',
     'durante' : 'DURANTE',
     'sitiene' : 'SITIENE',

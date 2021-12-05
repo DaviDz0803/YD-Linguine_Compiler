@@ -102,7 +102,16 @@ def buscarFicheros(directorio):
         cont = cont+1
     
     while respuesta == False:
-        numArchivo = input('\nNumero del test: ')
+        while True:
+            try:
+                numArchivo = int(input('\nNumero del test >>'))
+            except:
+                numArchivo = 0
+
+            if numArchivo != 0 and numArchivo <= cont - 1 :
+                break
+
+
         for file in files:
             if file == files[int(numArchivo)-1]:
                 respuesta = True
@@ -114,6 +123,10 @@ def buscarFicheros(directorio):
 
 
 directorio = './test/'
+#Menu
+print("\n*** LINGUINE COMPILER ***")
+print("--------------------------\n")
+
 archivo = buscarFicheros(directorio)
 #print(directorio+archivo)
 f = open(directorio+archivo, "r")
@@ -121,8 +134,22 @@ f = open(directorio+archivo, "r")
 #f = open("./entrada.txt", "r")
 input = f.read()
 
-instrucciones = g.parse(input) #Recibe el archivo y se lo pasa a 
-                                #gramatica
+instrucciones = g.parse(input) #Recibe el archivo y se lo pasa a gramatica
+
+                         
 ts_global = TS.TablaDeSimbolos()
 
-procesar_instrucciones(instrucciones, ts_global)
+try:
+    procesar_instrucciones(instrucciones, ts_global)
+except:
+    print("Error: Revisa la sintaxis de tu codigo fuente")
+    print('''\nWARNING: 
+    -"Recuerda colocar punto y coma al final de cada sentencia."
+    -"Recuerda solo utilizar los parentesis para:
+      *Imprimir
+      *Encerrar operaciones aritmeticas
+      *Declarar un ciclo.
+    -"Al imprimir variables asegurate de concatenar utilizando -> & " ''')
+
+os.system("pause")
+

@@ -1,19 +1,15 @@
-
-servir("Tablas de" & " multiplicar");
-
-cantidad manzanas;
+servir("TABLA" & " Sobre la mesa");
+ingrediente manzanas;
 manzanas=0;
-cantidad miel;
-miel=1;
+ingrediente miel;
+miel = 1;
 servir("----------------");
 servir("licuar");
-
-durante(manzanas<10+miel){	
-	manzanas=manzanas+1;
-	cantidad batidos;
-	batidos=0;
-	batidos=batidos+1;
-	servir("manzanas: " & manzanas & " * batidos: " & batidos & " = total de batidos: " & manzanas * batidos);
-	servir("----------------");
+durante(manzanas<5+miel){	
+manzanas=manzanas + 1;
+ingrediente batidos;
+batidos=0;
+batidos=batidos+1;
+servir("manzanas:" & manzanas & " * batidos: " & batidos & " = total de batidos: " & manzanas * batidos);
+servir("----------------");
 }
-

@@ -1,0 +1,4 @@
+&
+ingrediente n;
+n=(1+2)
+servir(n); 

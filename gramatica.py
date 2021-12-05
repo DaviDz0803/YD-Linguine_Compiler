@@ -1,51 +1,57 @@
+from expresiones import *
+from instrucciones import *
+import ply.lex as lex
+import ply.yacc as yacc
+
+
 reservadas = {
-    'numero' : 'NUMERO',
+    'cantidad' : 'CANTIDAD',
     'servir' : 'SERVIR',
-    'mientras' : 'MIENTRAS',
-    'if' : 'IF',
-    'else' : 'ELSE'
+    'durante' : 'DURANTE',
+    'sitiene' : 'SITIENE',
+    'sino' : 'SINO'
 }
 
 tokens  = [
-    'PTCOMA',
-    'LLAVIZQ',
-    'LLAVDER',
-    'PARIZQ',
-    'PARDER',
-    'IGUAL',
-    'MAS',
-    'MENOS',
-    'POR',
-    'DIVIDIDO',
+    'SEMMICOLOM',
+    'LKEY',
+    'RKEY',
+    'LPARENT',
+    'RPARENT',
+    'ASSIGN',
+    'PLUS',
+    'MINUS',
+    'MULTIPLY',
+    'DIVIDE',
     'CONCAT',
-    'MENQUE',
-    'MAYQUE',
-    'IGUALQUE',
-    'NIGUALQUE',
-    'DECIMAL',
-    'ENTERO',
-    'CADENA',
+    'LESSTHAN',
+    'MORETHAN',
+    'EQUALS',
+    'NOTEQUALS',
+    'ONZA', 
+    'GRAMO', 
+    'CHAIN', 
     'ID'
 ] + list(reservadas.values())
 
-# Tokens
-t_PTCOMA    = r';'
-t_LLAVIZQ   = r'{'
-t_LLAVDER   = r'}'
-t_PARIZQ    = r'\('
-t_PARDER    = r'\)'
-t_IGUAL     = r'='
-t_MAS       = r'\+'
-t_MENOS     = r'-'
-t_POR       = r'\*'
-t_DIVIDIDO  = r'/'
-t_CONCAT    = r'&'
-t_MENQUE    = r'<'
-t_MAYQUE    = r'>'
-t_IGUALQUE  = r'=='
-t_NIGUALQUE = r'!='
 
-def t_DECIMAL(t):
+t_SEMMICOLOM = r';'
+t_LKEY       = r'{'
+t_RKEY       = r'}'
+t_LPARENT    = r'\('
+t_RPARENT    = r'\)'
+t_ASSIGN     = r'='
+t_PLUS       = r'\+'
+t_MINUS      = r'-'
+t_MULTIPLY   = r'\*'
+t_DIVIDE     = r'/'
+t_CONCAT     = r'&'
+t_LESSTHAN   = r'<'
+t_MORETHAN   = r'>'
+t_EQUALS     = r'=='
+t_NOTEQUALS  = r'!='
+
+def t_GRAMO(t):
     r'\d+\.\d+'
     try:
         t.value = float(t.value)
@@ -54,7 +60,7 @@ def t_DECIMAL(t):
         t.value = 0
     return t
 
-def t_ENTERO(t):
+def t_ONZA(t):
     r'\d+'
     try:
         t.value = int(t.value)
@@ -65,25 +71,24 @@ def t_ENTERO(t):
 
 def t_ID(t):
      r'[a-zA-Z_][a-zA-Z_0-9]*'
-     t.type = reservadas.get(t.value.lower(),'ID')    # Check for reserved words
+     t.type = reservadas.get(t.value.lower(),'ID')    
      return t
 
-def t_CADENA(t):
+def t_CHAIN(t):
     r'\".*?\"'
-    t.value = t.value[1:-1] # remuevo las comillas
+    t.value = t.value[1:-1] 
     return t 
 
-# Comentario de múltiples líneas /* .. */
-def t_COMENTARIO_MULTILINEA(t):
+def t_MULTI_COMMENT(t):
     r'/\*(.|\n)*?\*/'
     t.lexer.lineno += t.value.count('\n')
 
-# Comentario simple // ...
-def t_COMENTARIO_SIMPLE(t):
+
+def t_SIMPLE_COMMENT(t):
     r'//.*\n'
     t.lexer.lineno += 1
 
-# Caracteres ignorados
+
 t_ignore = " \t"
 
 def t_newline(t):
@@ -91,26 +96,24 @@ def t_newline(t):
     t.lexer.lineno += t.value.count("\n")
     
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print ("caracter ilegal " + t.value[0])
     t.lexer.skip(1)
 
-# Construyendo el analizador léxico
-import ply.lex as lex
+
 lexer = lex.lex()
 
 
 # Asociación de operadores y precedencia
 precedence = (
     ('left','CONCAT'),
-    ('left','MAS','MENOS'),
-    ('left','POR','DIVIDIDO'),
+    ('left','PLUS','MINUS'),
+    ('left','MULTIPLY','DIVIDE'),
     ('right','UMENOS'),
     )
 
 # Definición de la gramática
 
-from expresiones import *
-from instrucciones import *
+
 
 
 def p_init(t) :
@@ -131,56 +134,57 @@ def p_instruccion(t) :
     '''instruccion      : servir_instr
                         | definicion_instr
                         | asignacion_instr
-                        | mientras_instr
-                        | if_instr
-                        | if_else_instr'''
+                        | durante_instr
+                        | sitiene_instr
+                        | sino_instr'''
     t[0] = t[1]
 
 def p_instruccion_servir(t) :
-    'servir_instr     : SERVIR PARIZQ expresion_cadena PARDER PTCOMA'
+    'servir_instr     : SERVIR LPARENT expresion_chain RPARENT SEMMICOLOM'
     t[0] =Servir(t[3])
 
 def p_instruccion_definicion(t) :
-    'definicion_instr   : NUMERO ID PTCOMA'
+    'definicion_instr   : CANTIDAD ID SEMMICOLOM'
     t[0] =Definicion(t[2])
 
 def p_asignacion_instr(t) :
-    'asignacion_instr   : ID IGUAL expresion_numerica PTCOMA'
+    'asignacion_instr   : ID ASSIGN expresion_numerica SEMMICOLOM'
     t[0] =Asignacion(t[1], t[3])
 
-def p_mientras_instr(t) :
-    'mientras_instr     : MIENTRAS PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER'
-    t[0] =Mientras(t[3], t[6])
+def p_durante_instr(t) :
+    'durante_instr     : DURANTE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY'
+    t[0] =Durante(t[3], t[6])
 
-def p_if_instr(t) :
-    'if_instr           : IF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER'
-    t[0] =If(t[3], t[6])
+def p_sitiene_instr(t) :
+    'sitiene_instr           : SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY'
+    t[0] =SiTiene(t[3], t[6])
 
-def p_if_else_instr(t) :
-    'if_else_instr      : IF PARIZQ expresion_logica PARDER LLAVIZQ instrucciones LLAVDER ELSE LLAVIZQ instrucciones LLAVDER'
-    t[0] =IfElse(t[3], t[6], t[10])
+def p_sino_instr(t) :
+    'sino_instr      : SITIENE LPARENT expresion_logica RPARENT LKEY instrucciones RKEY SINO LKEY instrucciones RKEY'
+    t[0] =SiNo(t[3], t[6], t[10])
 
 def p_expresion_binaria(t):
-    '''expresion_numerica : expresion_numerica MAS expresion_numerica
-                        | expresion_numerica MENOS expresion_numerica
-                        | expresion_numerica POR expresion_numerica
-                        | expresion_numerica DIVIDIDO expresion_numerica'''
-    if t[2] == '+'  : t[0] = ExpresionBinaria(t[1], t[3], OPERACION_ARITMETICA.MAS)
-    elif t[2] == '-': t[0] = ExpresionBinaria(t[1], t[3], OPERACION_ARITMETICA.MENOS)
-    elif t[2] == '*': t[0] = ExpresionBinaria(t[1], t[3], OPERACION_ARITMETICA.POR)
-    elif t[2] == '/': t[0] = ExpresionBinaria(t[1], t[3], OPERACION_ARITMETICA.DIVIDIDO)
+    '''expresion_numerica : expresion_numerica PLUS expresion_numerica
+                        | expresion_numerica MINUS expresion_numerica
+                        | expresion_numerica MULTIPLY expresion_numerica
+                        | expresion_numerica DIVIDE expresion_numerica'''
+    if t[2] == '+'  : t[0] = ExpresionBinaria(t[1], t[3], OPERACION_ARITMETICA.PLUS)
+    elif t[2] == '-': t[0] = ExpresionBinaria(t[1], t[3], OPERACION_ARITMETICA.MINUS)
+    elif t[2] == '*': t[0] = ExpresionBinaria(t[1], t[3], OPERACION_ARITMETICA.MULTIPLY)
+    elif t[2] == '/': t[0] = ExpresionBinaria(t[1], t[3], OPERACION_ARITMETICA.DIVIDE)
+
 
 def p_expresion_unaria(t):
-    'expresion_numerica : MENOS expresion_numerica %prec UMENOS'
+    'expresion_numerica : MINUS expresion_numerica %prec UMENOS'
     t[0] = ExpresionNegativo(t[2])
 
 def p_expresion_agrupacion(t):
-    'expresion_numerica : PARIZQ expresion_numerica PARDER'
+    'expresion_numerica : LPARENT expresion_numerica RPARENT'
     t[0] = t[2]
 
 def p_expresion_number(t):
-    '''expresion_numerica : ENTERO
-                        | DECIMAL'''
+    '''expresion_numerica : ONZA
+                        | GRAMO'''
     t[0] = ExpresionNumero(t[1])
 
 def p_expresion_id(t):
@@ -188,32 +192,34 @@ def p_expresion_id(t):
     t[0] = ExpresionIdentificador(t[1])
 
 def p_expresion_concatenacion(t) :
-    'expresion_cadena     : expresion_cadena CONCAT expresion_cadena'
+    'expresion_chain     : expresion_chain CONCAT expresion_chain'
     t[0] = ExpresionConcatenar(t[1], t[3])
 
-def p_expresion_cadena(t) :
-    'expresion_cadena     : CADENA'
+def p_expresion_chain(t) :
+    'expresion_chain     : CHAIN'
     t[0] = ExpresionDobleComilla(t[1])
 
-def p_expresion_cadena_numerico(t) :
-    'expresion_cadena     : expresion_numerica'
+def p_expresion_cadena_numerico(t) :                               #REVISAR, 
+    'expresion_chain     : expresion_numerica'                     #Pendiente
     t[0] = ExpresionCadenaNumerico(t[1])
 
 def p_expresion_logica(t) :
-    '''expresion_logica : expresion_numerica MAYQUE expresion_numerica
-                        | expresion_numerica MENQUE expresion_numerica
-                        | expresion_numerica IGUALQUE expresion_numerica
-                        | expresion_numerica NIGUALQUE expresion_numerica'''
-    if t[2] == '>'    : t[0] = ExpresionLogica(t[1], t[3], OPERACION_LOGICA.MAYOR_QUE)
-    elif t[2] == '<'  : t[0] = ExpresionLogica(t[1], t[3], OPERACION_LOGICA.MENOR_QUE)
-    elif t[2] == '==' : t[0] = ExpresionLogica(t[1], t[3], OPERACION_LOGICA.IGUAL)
-    elif t[2] == '!=' : t[0] = ExpresionLogica(t[1], t[3], OPERACION_LOGICA.DIFERENTE)
+    '''expresion_logica : expresion_numerica MORETHAN expresion_numerica
+                        | expresion_numerica LESSTHAN expresion_numerica
+                        | expresion_numerica EQUALS expresion_numerica
+                        | expresion_numerica NOTEQUALS expresion_numerica'''
+    if t[2] == '>'    : t[0] = ExpresionLogica(t[1], t[3], OPERACION_LOGICA.MORETHAN)
+    elif t[2] == '<'  : t[0] = ExpresionLogica(t[1], t[3], OPERACION_LOGICA.LESSTHAN)
+    elif t[2] == '==' : t[0] = ExpresionLogica(t[1], t[3], OPERACION_LOGICA.EQUALS)
+    elif t[2] == '!=' : t[0] = ExpresionLogica(t[1], t[3], OPERACION_LOGICA.NOTEQUALS)
+
+
 
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)
 
-import ply.yacc as yacc
+
 parser = yacc.yacc()
 
 

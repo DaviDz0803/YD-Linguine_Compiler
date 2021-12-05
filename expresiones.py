@@ -1,16 +1,16 @@
 from enum import Enum
 
 class OPERACION_ARITMETICA(Enum) :
-    MAS = 1
-    MENOS = 2
-    POR = 3
-    DIVIDIDO = 4
+    PLUS = 1
+    MINUS = 2
+    MULTIPLY = 3
+    DIVIDE = 4
 
 class OPERACION_LOGICA(Enum) :
-    MAYOR_QUE = 1
-    MENOR_QUE = 2
-    IGUAL = 3
-    DIFERENTE = 4
+    MORETHAN = 1
+    LESSTHAN = 2
+    EQUALS = 3
+    NOTEQUALS = 4
 
 class ExpresionNumerica:
     '''

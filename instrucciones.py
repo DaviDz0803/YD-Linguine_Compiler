@@ -10,7 +10,7 @@ class Servir(Instruccion) :
     def __init__(self,  cad) :
         self.cad = cad
 
-class Mientras(Instruccion) :
+class Durante(Instruccion) :
     '''
         Esta clase representa la instrucción mientras.
         La instrucción mientras recibe como parámetro una expresión lógica y la lista
@@ -40,7 +40,7 @@ class Asignacion(Instruccion) :
         self.id = id
         self.expNumerica = expNumerica
 
-class If(Instruccion) : 
+class SiTiene(Instruccion) : 
     '''
         Esta clase representa la instrucción if.
         La instrucción if recibe como parámetro una expresión lógica y la lista
@@ -51,7 +51,7 @@ class If(Instruccion) :
         self.expLogica = expLogica
         self.instrucciones = instrucciones
 
-class IfElse(Instruccion) : 
+class SiNo(Instruccion) : 
     '''
         Esta clase representa la instrucción if-else.
         La instrucción if-else recibe como parámetro una expresión lógica y la lista

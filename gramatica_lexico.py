@@ -8,8 +8,8 @@ reservadas = {
     'cantidad' : 'CANTIDAD',
     'servir' : 'SERVIR',
     'durante' : 'DURANTE',
-    'if' : 'IF',
-    'else' : 'ELSE'
+    'sitiene' : 'SITIENE',
+    'sino' : 'SINO'
 }
 
 tokens  = [
@@ -28,8 +28,8 @@ tokens  = [
     'MORETHAN',
     'EQUALS',
     'NOTEQUALS',
-    'ONZA', #DECIMAL
-    'GRAMO', #ENTEROS
+    'ONZA', #ENTEROS
+    'GRAMO', #DECIMALES
     'CHAIN', #CADENA
     'ID'
 ] + list(reservadas.values())
@@ -53,7 +53,7 @@ t_EQUALS = r'=='
 t_NOTEQUALS = r'!='
 
 
-def t_ONZA(t):
+def t_GRAMO(t):
     r'\d+\.\d+'
     try:
         t.value = float(t.value)
@@ -62,7 +62,7 @@ def t_ONZA(t):
         t.value = 0
     return t
 
-def t_GRAMO(t):
+def t_ONZA(t):
     r'\d+'
     try:
         t.value = int(t.value)
@@ -87,7 +87,7 @@ def t_MULTI_COMMENT(t):
     t.lexer.lineno += t.value.count('\n')
 
 # Comentario simple // ...
-def t_SIMPLE_COMENT(t):
+def t_SIMPLE_COMMENT(t):
     r'//.*\n'
     t.lexer.lineno += 1
 

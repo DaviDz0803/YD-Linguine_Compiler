@@ -1,0 +1,13 @@
+ingrediente C;
+C=100;
+ingrediente resultado;
+
+sitiene (C > -1){
+   resultado = ( C * 9/5) + 32 ;
+    servir( "La temperatura es: " & resultado & "F");
+}
+
+sino{
+    servir("La temperatura convertida es:  " & resultado);
+}   
+

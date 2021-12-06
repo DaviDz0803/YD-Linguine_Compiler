@@ -1,0 +1,24 @@
+servir("-----Batido de fresas y moras-----");
+ingrediente leche;
+leche=1;
+ingrediente fresas;
+fresas=5;
+ingrediente moras;
+moras=3;
+
+servir("Para hacer un vatido de fresas y moras nesecita: ");
+servir(fresas & " fresas," & leche & " litro de leche y" & moras &" moras");
+
+sitiene (fresas == 5){
+    sitiene(leche == 1){
+        sitiene (moras == 3){
+            servir ("Cumples con los ingredientes!!");
+            servir ("1-poner todo en la licuadora");
+            servir ("2-servir Batido");
+        }
+    }
+}
+
+sino{
+    servir(" Losiento ! no puedes hacer batidito de fresas y moras");
+}

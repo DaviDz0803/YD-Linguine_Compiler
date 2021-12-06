@@ -54,7 +54,7 @@ def resolver_expreision_logica(expLog, ts):
     exp2 = resolver_expresion_aritmetica(expLog.exp2, ts)
     if expLog.operador == OPERACION_LOGICA.MORETHAN : return exp1 > exp2
     if expLog.operador == OPERACION_LOGICA.LESSTHAN : return exp1 < exp2
-    if expLog.operador == OPERACION_LOGICA.ASSIGN : return exp1 == exp2
+    if expLog.operador == OPERACION_LOGICA.EQUALS : return exp1 == exp2
     if expLog.operador == OPERACION_LOGICA.NOTEQUALS : return exp1 != exp2
 
 def resolver_expresion_aritmetica(expNum, ts):

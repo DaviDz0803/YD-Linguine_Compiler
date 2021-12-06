@@ -1,0 +1,8 @@
+ingrediente m;
+ingrediente n;
+
+m=7.2;
+n=85;
+
+servir("Listo");
+servir(n+m);

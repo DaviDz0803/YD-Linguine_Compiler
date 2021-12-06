@@ -1,8 +1,6 @@
 import ply.lex as lex
-import re
 import codecs
 import os 
-import sys
 
 reservadas = {
     'ingrediente' : 'INGREDIENTE',
@@ -12,30 +10,13 @@ reservadas = {
     'sino' : 'SINO'
 }
 
-tokens  = [
-    'SEMMICOLOM',
-    'LKEY',
-    'RKEY',
-    'LPARENT',
-    'RPARENT',
-    'ASSIGN',
-    'PLUS',
-    'MINUS',
-    'MULTIPLY',
-    'DIVIDE',
-    'CONCAT',
-    'LESSTHAN',
-    'MORETHAN',
-    'EQUALS',
-    'NOTEQUALS',
-    'ONZA', #ENTEROS
-    'GRAMO', #DECIMALES
-    'CHAIN', #CADENA
-    'ID'
-] + list(reservadas.values())
+tokens = [
+    'SEMMICOLOM','LKEY','RKEY','LPARENT','RPARENT', 
+    'ASSIGN','PLUS','MINUS','MULTIPLY','DIVIDE',
+    'CONCAT','LESSTHAN','MORETHAN','EQUALS','NOTEQUALS',
+    'ONZA','GRAMO', 'CHAIN', 'ID'
+    ] + list(reservadas.values())
 
-
-# Tokens
 t_SEMMICOLOM = r';'
 t_LKEY = r'{'
 t_RKEY = r'}'
@@ -51,7 +32,6 @@ t_LESSTHAN = r'<'
 t_MORETHAN = r'>'
 t_EQUALS = r'=='
 t_NOTEQUALS = r'!='
-
 
 def t_GRAMO(t):
     r'\d+\.\d+'
@@ -73,26 +53,23 @@ def t_ONZA(t):
 
 def t_ID(t):
      r'[a-zA-Z_][a-zA-Z_0-9]*'
-     t.type = reservadas.get(t.value.lower(),'ID')    # Check for reserved words
+     t.type = reservadas.get(t.value.lower(),'ID')  
      return t
 
 def t_CHAIN(t):
     r'\".*?\"'
-    t.value = t.value[1:-1] # remuevo las comillas
+    t.value = t.value[1:-1] 
     return t 
 
-# Comentario de múltiples líneas /* .. */
 def t_MULTI_COMMENT(t):
     r'/\*(.|\n)*?\*/'
     t.lexer.lineno += t.value.count('\n')
 
-# Comentario simple // ...
 def t_SIMPLE_COMMENT(t):
     r'//.*\n'
     t.lexer.lineno += 1
 
-# Caracteres ignorados
-t_ignore = " \t"
+t_ignore = " \r\t"
 
 def t_newline(t):
     r'\n+'
@@ -115,7 +92,15 @@ def buscarFicheros(directorio):
         cont = cont+1
     
     while respuesta == False:
-        numArchivo = input('\nNumero del test: ')
+        while True:
+            try:
+                numArchivo = int(input('\nNumero del test ~$:'))
+            except:
+                numArchivo = 0
+
+            if numArchivo != 0 and numArchivo <= cont - 1 :
+                break
+
         for file in files:
             if file == files[int(numArchivo)-1]:
                 respuesta = True
@@ -124,6 +109,10 @@ def buscarFicheros(directorio):
     print ("Has escogido \"%s\" \n" %files[int(numArchivo)-1])
 
     return files[int(numArchivo)-1]
+
+print("\n--------------------------")
+print("--- ANALIZADOR LEXICO  ---")
+print("--------------------------\n")
 
 directorio = './test/'
 archivo = buscarFicheros(directorio)
@@ -139,3 +128,6 @@ while True:
     tok = lexer.token()
     if not tok : break
     print (tok)
+    
+    
+os.system("pause")

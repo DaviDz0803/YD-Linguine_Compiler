@@ -1,0 +1,22 @@
+*******************************
+Configuracion de la terminal
+por pestanas
+*******************************
+[Diseno]{Tamano del bufer de pantalla:{
+		Ancho: 70,
+	 	 Alto: 8994,
+	 	 Ajustar la salida de texto al cambiar: Check,},
+	 Tamano de la ventana:{
+		ancho: 70,
+		Alto: 21
+		 },
+	  Posicion de la ventana: 
+		Dejar que el sistema ubique la ventana
+ 	 } 
+[Fuente]{Tamano: 20,
+	 Fuente: "Courier New"}
+
+
+
+
+	

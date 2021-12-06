@@ -1,0 +1,20 @@
+**********************************************************
+Instrucciones de como colocar el icono del compilador 
+y tener un acceso directo en el escritorio del mismo.
+***********************************************************
+
+1.En la carpeta principal debes darle click derecho al archivo:
+>> "main.py"
+
+2. seleciona la opcion "Crear acceso directo".
+
+3.Luego vas al archivo creado en tu escritorio y le das click derecho,
+4.posterior a esto oprimes en: "Propiedades".
+
+5.en la ventana de "Acceso directo", veremos debajo la opcion:
+"Cambiar icono...", oprimimos ahi.
+
+6.le damos a examinar y buscamos el icono que tenemos disponible
+en la carpeta "ICON". 
+
+7.Por ultimo oprimimos en aplicar y Aceptar.

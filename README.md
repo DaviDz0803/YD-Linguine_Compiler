@@ -1,4 +1,4 @@
-# Cook Compiler:
+# Linguine Compiler:
 ### ----------------------------------------
 ### Este poryecto fue desarrollado por los estudiantes,
 ### David Diaz y Yorlenis Arroyo.
@@ -7,7 +7,7 @@
 Este es un compilador realizado en python utilizando la libreria PLY,
 donde creamos nuestra propia sintaxis y tokens.
 
-Nos inspiramos en la cocina, por eso nuestro compilador se llama "Cook Compiler".
+Nos inspiramos en la cocina, por eso nuestro compilador se llama "Linguine Compiler".
 Este te permitirá realizar códigos como si estuvieras redactando una receta;
 el fin de este lenguaje, es programar de una manera diferente y divertida,
 utilizando conceptos básicos como la impresión por pantalla, declaración de variables, 

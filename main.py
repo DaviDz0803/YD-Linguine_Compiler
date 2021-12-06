@@ -119,7 +119,7 @@ def buscarFicheros(directorio):
 
 print("\n--------------------------")
 print("---COMPILADOR DE CODIGO---")
-print("***** COOK COMPILER *****")
+print("**** LINGUINE COMPILER ***")
 print("--------------------------\n")
 
 directorio = './test/'

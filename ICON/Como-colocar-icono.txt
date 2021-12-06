@@ -8,7 +8,7 @@ y tener un acceso directo en el escritorio del mismo.
 
 2. seleciona la opcion "Crear acceso directo".
 
-3.Luego vas al archivo creado en tu escritorio y le das click derecho,
+3.Luego vas al archivo creado de "Acceso directo" y le das click derecho,
 4.posterior a esto oprimes en: "Propiedades".
 
 5.en la ventana de "Acceso directo", veremos debajo la opcion:

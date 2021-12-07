@@ -1,0 +1,91 @@
+servir("****************************************");
+servir("              MC DONALDS                ");
+servir("----------------------------------------");
+servir("        CALCULADORA DE CALORIAS         ");
+servir("----------------------------------------");
+
+// **** Hamburguesas
+ingrediente BigMac;
+ingrediente CuartoDeLibra;
+ingrediente CheeseBurger;
+
+CheeseBurger = 300;
+BigMac = 550; 
+CuartoDeLibra = 520;
+
+// **** PAPAS
+ingrediente papas;
+papas = 220; 
+
+// **** SODAS
+ingrediente CocaCola;
+CocaCola = 150; 
+
+// **** Evaluacion de calorias por combos ****
+ingrediente comboBigMac;
+ingrediente comboCuartoDeLibra;
+ingrediente comboCheeseBurger;
+
+comboBigMac = BigMac + papas + CocaCola;
+comboCuartoDeLibra = CuartoDeLibra + papas + CocaCola;
+comboCheeseBurger = CheeseBurger + papas + CocaCola;
+
+servir("----------------------------------------------");
+servir("-Evaluaremos cuantas calorias tiene los");
+servir(" siguientes combos:");
+servir("    *Total combo BigMac: "& comboBigMac &" Cal.");
+servir("    *Total combo Cuarto de Libra: "& comboCuartoDeLibra &" Cal.");
+servir("    *Total combo Queso Hamburguesa: "& comboCheeseBurger &" Cal.");
+
+//_______________________________________________________________________________
+// *********************** IMPORTANTE INPUT DEL PROGRAMA *************************
+
+// Ahora Colocaras cual combo y cuantos combos te haz comido:
+ingrediente inicio;
+ingrediente cantidad;
+ingrediente combo;
+ingrediente resultado;
+inicio = 0;
+resultado = 0;
+
+// ********* inputs ***************
+cantidad = 3;
+combo = comboBigMac;
+
+
+servir("----------------------------------------------");
+servir("*** PROCESANDO COMBOS: ***");
+
+durante(inicio < cantidad){
+        inicio = inicio + 1;
+        resultado = resultado + combo;
+        servir(">>["& inicio &"] -Calorias acumuladas: ("& resultado &" Cal.)");
+}
+servir("----------------------------------------------");
+servir("Total de calorias consumidas: "& resultado &" Cal.");
+servir("______________________________________________");
+
+//_______________________________________________________________________________
+//Aqui vamos a evaluar cuantas horas deberas saltar soga para quemar las calorias
+
+servir("++++++++++++++ CONSEJOS ++++++++++++++++++++++");
+servir("----------------------------------------------");
+servir("+Digamos que necesitas quemar las calorias saltando soga,");
+servir(".......");
+servir("+Puedes quemar 680 Calorias saltando durante 1 hora. ");
+Servir("Teniendo en cuenta esto y sabiendo que has consumido: "& resultado &" Cal.");
+servir("----------------------------------------------");
+servir("Usted:");
+
+sitiene(resultado < 2040){
+        servir("FELICIDADES!!!");
+        servir("*Deberia saltar soga menos de 2 horas (2,040 Cal.) Aprox.");
+        
+        }sino{  servir("AUSH!!! :( que mal tu dieta.");
+                servir("*Debe Saltar soga mas de 2 horas uff!!");
+                servir("*Ah este paso no vas a vivir mucho.");
+                servir("*Con 2 horas solo quemarias 2,040 Cal.");
+                }
+servir("==========================================================");
+servir("FIN de la consulta");
+

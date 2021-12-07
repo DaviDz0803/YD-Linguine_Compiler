@@ -22,3 +22,6 @@ asignación de valores, ciclos con while y validaciones.
 - Construcción de condicional else: sino()
 
 Gracias. 
+
+presentación disponible:
+https://view.genial.ly/61ad420c0cece40d63da6988/dossier-compilador

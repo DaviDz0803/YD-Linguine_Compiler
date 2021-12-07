@@ -126,14 +126,19 @@ directorio = './test/'
 archivo = buscarFicheros(directorio)
 f = open(directorio+archivo, "r")
 input = f.read()
-instrucciones = g.parse(input) #Recibe el archivo y se lo pasa a gramatica
+
+try:
+    instrucciones = g.parse(input) #Recibe el archivo y se lo pasa a gramatica
+except:
+    print("Error: Tienes una sentencia incompleta en tu codigo.")
+
                          
 ts_global = TS.TablaDeSimbolos()
 
 try:
     procesar_instrucciones(instrucciones, ts_global)
 except:
-    print("Error: Revisa la sintaxis de tu codigo fuente")
+    print("Error: Revisa la sintaxis de tu codigo fuente.")
     print('''\nWARNING: 
     -"Recuerda colocar punto y coma al final de cada sentencia."
     -"Las declaraciones deben ser de tipo numericas (int o float)."

@@ -1,0 +1,40 @@
+servir("****************************************");
+servir("        RECETA, DEDOS DE QUESO          ");
+servir("----------------------------------------");
+
+//ingredientes a utilizar
+
+ingrediente quesoBlanco;
+quesoBlanco = 500; //gramos
+
+ingrediente huevo;
+huevo = 3;
+
+ingrediente panRallado;
+panRallado = 1; 
+
+ingrediente sal;
+sal = 1; //cucharadita
+
+ingrediente aceite;
+aceite = 1; //cantidad suficiente para sumergir las partes
+
+servir("*** PASO 1: ***");
+servir("Los ingredientes que necesitaremos son:");
+servir(quesoBlanco & "g de Queso Blanco.");
+servir(huevo & " Huevos.");
+servir(panRallado & " Pan rallado.");
+servir(sal &" Sal, al gusto.");
+servir(aceite &" Aceite, que cubra las piezas.");
+servir("------------------------------------");
+servir("*** PASO 2: ***");
+servir("Procedimiento:");
+servir("-Lo primero, es cortar el bloque de queso.");
+servir("-Luego pasamos los dedos por huevo batido");
+servir(" y el pan-rayado.");
+servir("-Una vez lo tenemos apandos, los guardamos ");
+servir(" en la nevera, durante 1 hora.");
+servir("-Por ultimo los freimos durante un minuto.");
+servir("------------------------------------");
+
+

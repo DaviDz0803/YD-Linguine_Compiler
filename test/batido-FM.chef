@@ -5,6 +5,8 @@ ingrediente fresas;
 fresas=5;
 ingrediente moras;
 moras=3;
+ingrediente tiempo;
+tiempo = 0;
 
 servir("Para hacer un vatido de fresas y moras nesecita: ");
 servir(fresas & " fresas," & leche & " litro de leche y" & moras &" moras");
@@ -14,6 +16,11 @@ sitiene (fresas == 5){
         sitiene (moras == 3){
             servir ("Cumples con los ingredientes!!");
             servir ("1-poner todo en la licuadora");
+            durante (tiempo < 100){
+                tiempo = tiempo +1;
+                servir ("batiendo [" & tiempo & "%]");
+            }
+            servir("Batido Listo!");
             servir ("2-servir Batido");
         }
     }

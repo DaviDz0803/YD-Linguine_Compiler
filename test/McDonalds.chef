@@ -9,10 +9,10 @@ ingrediente BigMac;
 ingrediente CuartoDeLibra;
 ingrediente CheeseBurger;
 
-CheeseBurger = 300;
-BigMac = 550; 
-CuartoDeLibra = 520;
-
+CheeseBurger = 300; //Cal.
+BigMac = 550;  //Cal.
+CuartoDeLibra = 520; //Cal.
+ 
 // **** PAPAS
 ingrediente papas;
 papas = 220; 
@@ -49,8 +49,8 @@ inicio = 0;
 resultado = 0;
 
 // ********* inputs ***************
-cantidad = 3;
-combo = comboBigMac;
+cantidad = 10;
+combo = comboCheeseBurger;
 
 
 servir("----------------------------------------------");

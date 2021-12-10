@@ -3,11 +3,11 @@ import codecs
 import os 
 
 reservadas = {
-    'ingrediente' : 'INGREDIENTE',
-    'servir' : 'SERVIR',
-    'durante' : 'DURANTE',
-    'sitiene' : 'SITIENE',
-    'sino' : 'SINO'
+    'ingrediente' : 'INGREDIENTE', #Declara variable de tipo numero
+    'servir' : 'SERVIR',            #Print
+    'durante' : 'DURANTE',          #While
+    'sitiene' : 'SITIENE',          #if
+    'sino' : 'SINO'                 #else
 }
 
 tokens = [
@@ -33,7 +33,7 @@ t_MORETHAN = r'>'
 t_EQUALS = r'=='
 t_NOTEQUALS = r'!='
 
-def t_GRAMO(t):
+def t_GRAMO(t):  #Numeros flotantes
     r'\d+\.\d+'
     try:
         t.value = float(t.value)
@@ -42,7 +42,7 @@ def t_GRAMO(t):
         t.value = 0
     return t
 
-def t_ONZA(t):
+def t_ONZA(t):   #Numeros enteros
     r'\d+'
     try:
         t.value = int(t.value)

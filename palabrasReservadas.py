@@ -15,7 +15,7 @@ class Durante(Instruccion):
 class Definicion(Instruccion) :
     ''' Ejemplo: variable abc; '''
 
-    def __init__(self, id) :
+    def __init__(self, id):
         self.id = id
 
 class Asignacion(Instruccion) :
